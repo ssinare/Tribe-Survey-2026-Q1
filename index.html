@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tribe Payments — Employee Survey Analysis 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TRIBE BRAND TOKENS ─────────────────────────────────────── */
+:root {
+  --purple:    #4D1254;
+  --purple2:   #3D0A44;
+  --gold:      #EFA500;
+  --gold2:     #EDA400;
+  --red-grad:  #E46962;
+  --lavender:  #D4BEE4;
+  --lavender2: #E8D5EE;
+  --offwhite:  #F8F5FA;
+  --border:    #E0D4E8;
+  --text:      #2D1535;
+  --muted:     #7A6882;
+  --white:     #FFFFFF;
+  --green:     #27AE60;
+  --red:       #E46962;
+}
+
+/* ── RESET & BASE ───────────────────────────────────────────── */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--offwhite);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+}
+h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; }
+
+/* ── TOP NAV BAR ────────────────────────────────────────────── */
+.topbar {
+  background: var(--purple);
+  padding: 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 12px rgba(77,18,84,0.4);
+}
+.topbar-logo {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--white);
+  letter-spacing: -0.5px;
+}
+.topbar-title {
+  font-size: 13px;
+  color: var(--lavender);
+  font-weight: 400;
+}
+.topbar-tag {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* ── HERO ───────────────────────────────────────────────────── */
+.hero {
+  background: var(--purple);
+  background-image: radial-gradient(ellipse at 80% 50%, #6B1A74 0%, var(--purple) 60%);
+  padding: 64px 40px 56px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  right: -80px; top: -80px;
+  width: 420px; height: 420px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpolygon points='100,10 183,55 183,145 100,190 17,145 17,55' fill='%23FFFFFF' opacity='0.04'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  right: 60px; bottom: -40px;
+  width: 220px; height: 220px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpolygon points='100,10 183,55 183,145 100,190 17,145 17,55' fill='%23EFA500' opacity='0.9'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.hero h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+.hero h1 span { color: var(--gold); }
+.hero-sub {
+  font-size: 15px;
+  color: var(--lavender);
+  margin-top: 10px;
+  font-weight: 300;
+}
+.hero-divider {
+  width: 60px; height: 3px;
+  background: var(--gold);
+  margin: 20px 0;
+}
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 8px;
+}
+.hero-stat-val {
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--gold);
+  line-height: 1;
+}
+.hero-stat-lbl {
+  font-size: 12px;
+  color: var(--lavender);
+  margin-top: 2px;
+}
+
+/* ── SECTION WRAPPERS ───────────────────────────────────────── */
+.container { max-width: 1380px; margin: 0 auto; padding: 0 32px; }
+.section { padding: 48px 0 0; }
+.section-last { padding-bottom: 64px; }
+
+.section-eyebrow {
+  font-family: 'Poppins', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.section-heading {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--purple);
+  margin-bottom: 4px;
+}
+.section-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-bottom: 28px;
+}
+
+/* ── DIVIDER ────────────────────────────────────────────────── */
+.divider { border: none; border-top: 1px solid var(--border); margin: 48px 0 0; }
+
+/* ── SECTION SEPARATOR BAND ────────────────────────────────── */
+.sep-band {
+  background: var(--purple);
+  background-image: radial-gradient(ellipse at 90% 50%, #6B1A74 0%, var(--purple) 70%);
+  padding: 28px 40px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin: 48px -32px 0;
+  position: relative;
+  overflow: hidden;
+}
+.sep-band::after {
+  content: '';
+  position: absolute; right: 20px; top: -20px;
+  width: 120px; height: 120px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpolygon points='100,10 183,55 183,145 100,190 17,145 17,55' fill='%23EFA500' opacity='0.8'/%3E%3C/svg%3E") center/contain no-repeat;
+}
+.sep-num {
+  font-family: 'Poppins', sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--gold);
+  opacity: 0.5;
+  line-height: 1;
+}
+.sep-text h3 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+}
+.sep-text p { font-size: 13px; color: var(--lavender); }
+
+/* ── CARD ───────────────────────────────────────────────────── */
+.card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 8px rgba(77,18,84,0.05);
+}
+
+/* ── KPI GRID ───────────────────────────────────────────────── */
+.kpi-grid { display: grid; grid-template-columns: repeat(5,1fr); gap: 16px; margin-bottom: 32px; }
+.kpi-card {
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px 18px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(77,18,84,0.06);
+}
+.kpi-card::before {
+  content: '';
+  position: absolute; top:0; left:0; right:0;
+  height: 4px;
+}
+.kpi-card.kc-purple::before { background: var(--purple); }
+.kpi-card.kc-green::before  { background: var(--green); }
+.kpi-card.kc-gold::before   { background: var(--gold); }
+.kpi-card.kc-red::before    { background: var(--red-grad); }
+.kpi-lbl { font-size: 9px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.kpi-val { font-family: 'Poppins', sans-serif; font-size: 34px; font-weight: 800; line-height: 1; }
+.kpi-val.kc-purple { color: var(--purple); }
+.kpi-val.kc-green  { color: var(--green); }
+.kpi-val.kc-gold   { color: var(--gold); }
+.kpi-val.kc-red    { color: var(--red-grad); }
+.kpi-sub { font-size: 11px; color: var(--muted); margin-top: 6px; }
+
+/* ── CATEGORY BARS ──────────────────────────────────────────── */
+.cat-row { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.cat-lbl { font-size: 12px; color: var(--text); min-width: 240px; text-align: right; }
+.cat-track { flex: 1; height: 10px; background: var(--lavender2); border-radius: 5px; overflow: hidden; position: relative; }
+.cat-fill { height: 100%; border-radius: 5px; }
+.cat-avg-line {
+  position: absolute; top: -3px; bottom: -3px; width: 2px;
+  background: var(--muted); opacity: 0.5;
+}
+.cat-val { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; min-width: 38px; }
+
+/* ── BAR CHART (positive/negative) ─────────────────────────── */
+.split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel-head {
+  padding: 10px 14px;
+  border-radius: 8px 8px 0 0;
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+.panel-head.pos { background: #DCFCE7; color: #166534; }
+.panel-head.neg { background: #FEE2E2; color: #991B1B; }
+.panel-body { background: var(--white); border: 1px solid var(--border); border-top: none; border-radius: 0 0 8px 8px; padding: 12px 16px; }
+.bar-row2 { display: flex; align-items: center; gap: 10px; margin-bottom: 9px; }
+.bar-row2:last-child { margin-bottom: 0; }
+.bar-lbl2 { font-size: 12px; color: var(--text); min-width: 180px; text-align: right; }
+.bar-track2 { flex: 1; height: 10px; background: var(--lavender2); border-radius: 5px; overflow: hidden; }
+.bar-fill2 { height: 100%; border-radius: 5px; }
+.bar-val2 { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; min-width: 28px; }
+
+/* ── HEATMAP ────────────────────────────────────────────────── */
+.heatmap-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+table.hm { border-collapse: collapse; width: 100%; font-size: 11px; }
+table.hm th {
+  background: var(--purple);
+  color: var(--lavender);
+  padding: 6px 4px;
+  text-align: center;
+  font-size: 9px;
+  font-weight: 600;
+  white-space: nowrap;
+  border-right: 1px solid rgba(255,255,255,0.1);
+  cursor: pointer;
+  position: relative;
+}
+table.hm th:first-child { text-align: left; min-width: 160px; padding-left: 12px; cursor: default; }
+table.hm th.tot { background: var(--gold); color: var(--purple); font-weight: 800; min-width: 52px; }
+table.hm th .q-num { display: block; font-size: 9px; font-weight: 800; color: var(--gold); margin-bottom: 2px; }
+table.hm th.tot .q-num { color: var(--purple); }
+table.hm th:hover:not(:first-child):not(.tot) { background: #3D0A44; }
+table.hm td { padding: 4px 3px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.5); border-right: 1px solid rgba(0,0,0,0.04); }
+table.hm td:first-child { text-align: left; padding-left: 12px; font-size: 11px; color: var(--text); background: var(--white); border-right: 1px solid var(--border); }
+table.hm tr:last-child td { border-bottom: none; }
+table.hm tr:hover td:not(:first-child):not(.tot-cell) { filter: brightness(0.93); }
+.hm-cell {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 40px; height: 22px; border-radius: 4px;
+  font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 600;
+}
+.tot-cell {
+  font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 800;
+  padding: 4px 8px !important;
+}
+.col-avg-row td { background: #FAF7FC !important; font-size: 10px; color: var(--muted); border-top: 2px solid var(--border) !important; }
+.col-avg-row td:first-child { font-size: 9px; color: var(--muted); font-style: italic; }
+
+/* ── TOOLTIP ────────────────────────────────────────────────── */
+.tooltip-popup {
+  display: none;
+  position: fixed;
+  background: var(--purple);
+  color: var(--white);
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  max-width: 320px;
+  z-index: 999;
+  pointer-events: none;
+  border: 1px solid var(--gold);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  line-height: 1.5;
+}
+.tooltip-popup .tt-q { font-size: 10px; color: var(--gold); font-family:'Poppins',sans-serif; font-weight:700; margin-bottom:4px; }
+.tooltip-popup .tt-full { font-size: 12px; }
+.tooltip-popup .tt-avg { font-size: 11px; margin-top: 6px; color: var(--lavender); }
+
+/* ── RED FLAGS TABLE ────────────────────────────────────────── */
+.flag-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.flag-table th { background: var(--purple); color: var(--white); padding: 10px 12px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.flag-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: middle; }
+.flag-table tr:last-child td { border-bottom: none; }
+.flag-table tr:hover td { background: var(--offwhite); }
+.flag-avg { font-family:'Poppins',sans-serif; font-size: 15px; font-weight: 800; }
+.rank-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 24px; height: 24px; border-radius: 50%;
+  font-family: 'Poppins', sans-serif; font-size: 11px; font-weight: 800;
+}
+.rank-1 { background: #FEE2E2; color: var(--red-grad); }
+.rank-2 { background: #FEE2E2; color: var(--red-grad); }
+.rank-3 { background: #FEF3C7; color: #92400E; }
+.rank-n { background: var(--lavender2); color: var(--purple); }
+.pill {
+  display: inline-block; padding: 2px 9px; border-radius: 100px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+}
+.pill-red    { background: #FEE2E2; color: var(--red-grad); }
+.pill-gold   { background: #FEF3C7; color: #92400E; }
+.pill-purple { background: var(--lavender2); color: var(--purple); }
+.flag-note { background: #FEF3C7; border: 1px solid var(--gold); border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #7D5A00; margin-top: 14px; }
+
+/* ── INSIGHT CARDS ──────────────────────────────────────────── */
+.insight-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+.ins-card {
+  border: 1px solid;
+  border-radius: 12px;
+  padding: 18px 20px;
+  position: relative;
+}
+.ins-tag {
+  display: inline-block; padding: 3px 10px; border-radius: 100px;
+  font-size: 9px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.ins-title { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+.ins-body { font-size: 12px; color: #374151; line-height: 1.65; }
+
+/* ── SQUAD TABLE ────────────────────────────────────────────── */
+.squad-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.squad-table th { background: var(--purple); color: var(--white); padding: 10px 12px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+.squad-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+.squad-table tr:nth-child(even) td { background: #FAF7FC; }
+.squad-table tr:last-child td { border-bottom: none; }
+
+/* ── ENPS ───────────────────────────────────────────────────── */
+.enps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
+.enps-big { font-family: 'Poppins', sans-serif; font-size: 72px; font-weight: 800; line-height: 1; }
+.enps-bar-wrap { display: flex; border-radius: 8px; overflow: hidden; height: 20px; margin-top: 16px; }
+.enps-seg { display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
+
+/* ── RECS ───────────────────────────────────────────────────── */
+.rec-card {
+  display: flex; gap: 16px; align-items: flex-start;
+  border: 1px solid; border-radius: 12px;
+  padding: 16px 20px; margin-bottom: 10px;
+}
+.rec-num {
+  flex-shrink: 0; width: 30px; height: 30px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Poppins', sans-serif; font-size: 14px; font-weight: 800; color: white;
+  margin-top: 2px;
+}
+.rec-body h4 { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+.rec-body p { font-size: 12px; color: #374151; line-height: 1.6; }
+
+/* ── Q REFERENCE ────────────────────────────────────────────── */
+.qref-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.q-item { display: flex; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--border); }
+.q-badge {
+  flex-shrink: 0; width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 6px; font-family: 'Poppins', sans-serif; font-size: 10px; font-weight: 800;
+}
+.q-content .q-short { font-family: 'Poppins', sans-serif; font-size: 12px; font-weight: 700; color: var(--purple); }
+.q-content .q-full  { font-size: 11px; color: var(--muted); font-style: italic; }
+.q-content .q-avg   { font-size: 11px; font-weight: 700; margin-top: 2px; }
+
+/* ── FOOTER ─────────────────────────────────────────────────── */
+footer {
+  background: var(--purple2);
+  color: var(--lavender);
+  text-align: center;
+  padding: 24px;
+  font-size: 12px;
+  margin-top: 64px;
+}
+footer strong { color: var(--gold); }
+
+/* ── ANIMATIONS ─────────────────────────────────────────────── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fadeUp 0.5s ease both; }
+
+@media (max-width: 900px) {
+  .kpi-grid { grid-template-columns: repeat(3,1fr); }
+  .split-grid, .insight-grid, .enps-grid, .qref-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-logo">tribe</div>
+  <div class="topbar-title">Employee Survey Analysis</div>
+  <div class="topbar-tag">April 2026 · Confidential</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="container">
+    <h1>Employee Survey<br><span>Analysis Report</span></h1>
+    <div class="hero-divider"></div>
+    <div class="hero-sub">Internal Engagement Survey · April 2026 · Confidential</div>
+    <div class="hero-stats">
+      <div><div class="hero-stat-val">163</div><div class="hero-stat-lbl">Respondents</div></div>
+      <div><div class="hero-stat-val">21</div><div class="hero-stat-lbl">Departments</div></div>
+      <div><div class="hero-stat-val">9</div><div class="hero-stat-lbl">Squads</div></div>
+      <div><div class="hero-stat-val">16</div><div class="hero-stat-lbl">Questions</div></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ── 01 EXECUTIVE KPIs ──────────────────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">01 · Overview</div>
+  <div class="section-heading">Executive Summary</div>
+  <div class="section-sub">Key engagement metrics across 163 respondents and 16 questions</div>
+
+  <div class="kpi-grid">
+    <div class="kpi-card kc-purple">
+      <div class="kpi-lbl">Overall Score (16 Q)</div>
+      <div class="kpi-val kc-purple">8.24<span style="font-size:18px;opacity:.4">/10</span></div>
+      <div class="kpi-sub">Average across all questions incl. retention & eNPS</div>
+    </div>
+    <div class="kpi-card kc-green">
+      <div class="kpi-lbl">eNPS Score</div>
+      <div class="kpi-val kc-green">+25</div>
+      <div class="kpi-sub">65 promoters · 73 passives · 25 detractors · Good for fintech</div>
+    </div>
+    <div class="kpi-card kc-gold">
+      <div class="kpi-lbl">Retention Intent</div>
+      <div class="kpi-val kc-gold">7.67<span style="font-size:18px;opacity:.4">/10</span></div>
+      <div class="kpi-sub">"I see myself staying 2 years" — warrants attention</div>
+    </div>
+    <div class="kpi-card kc-red">
+      <div class="kpi-lbl">Lowest Question</div>
+      <div class="kpi-val kc-red">7.60</div>
+      <div class="kpi-sub">Workload without excessive stress — most critical gap</div>
+    </div>
+    <div class="kpi-card kc-red">
+      <div class="kpi-lbl">Critical Department</div>
+      <div class="kpi-val kc-red" style="font-size:22px;margin-top:6px;">Senior Mgmt</div>
+      <div class="kpi-sub">6.96 avg — lowest across all 21 departments</div>
+    </div>
+  </div>
+
+  <!-- Category bars -->
+  <div class="card">
+    <div style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px;">Score by Category</div>
+    <div id="catBars"></div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;">▲ Dashed line = company average (8.24)</div>
+  </div>
+</div>
+
+<!-- ── SECTION BREAK ──────────────────────────────────────── -->
+<div class="sep-band">
+  <div class="sep-num">02</div>
+  <div class="sep-text"><h3>Heatmaps</h3><p>Department & Squad scores across all 16 questions</p></div>
+</div>
+
+<!-- ── 02 DEPT HEATMAP ───────────────────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">02 · Department Heatmap</div>
+  <div class="section-heading">All 21 Departments · 16 Questions</div>
+  <div class="section-sub">
+    Color scale: <span style="color:var(--green);font-weight:700;">■ green</span> = above average (8.24) &nbsp;·&nbsp;
+    <span style="color:#aaa;font-weight:700;">■ white</span> = at average &nbsp;·&nbsp;
+    <span style="color:var(--red-grad);font-weight:700;">■ red</span> = below average &nbsp;·&nbsp;
+    <strong style="color:var(--purple)">Click any Q column header</strong> to see full question text
+  </div>
+  <div class="heatmap-wrap">
+    <table class="hm" id="deptTable"></table>
+  </div>
+</div>
+
+<!-- ── 03 SQUAD HEATMAP ──────────────────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">03 · Squad Heatmap</div>
+  <div class="section-heading">All 9 Squads · 16 Questions</div>
+  <div class="section-sub">Same diverging color scale · "xxx" = respondents without squad assignment · ranked highest → lowest</div>
+  <div class="heatmap-wrap">
+    <table class="hm" id="squadTable"></table>
+  </div>
+</div>
+
+<!-- ── SECTION BREAK ──────────────────────────────────────── -->
+<div class="sep-band">
+  <div class="sep-num">03</div>
+  <div class="sep-text"><h3>Risk Indicators</h3><p>Bottom 10 individual scores & patterns</p></div>
+</div>
+
+<!-- ── 04 RED FLAGS ──────────────────────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">04 · Red Flags</div>
+  <div class="section-heading">Bottom 10 Individual Scores</div>
+  <div class="section-sub">Lowest averages across all 16 questions · 3 managers appear twice in this list</div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="flag-table">
+      <thead><tr>
+        <th style="width:40px">#</th>
+        <th style="width:70px">Avg</th>
+        <th>Department</th>
+        <th>Squad</th>
+        <th>Manager</th>
+        <th>Lowest Dimensions</th>
+      </tr></thead>
+      <tbody id="flagBody"></tbody>
+    </table>
+  </div>
+  <div class="flag-note">
+    ⚠ <strong>Pattern:</strong> 3 managers appear twice (Indre Drulyte-Jukne · Ieva Usonyte · Guy Houghton). WALLET squad contains 3 of 10 entries despite a 7.97 squad average — high internal variance signals a localised crisis.
+  </div>
+</div>
+
+<!-- ── SECTION BREAK ──────────────────────────────────────── -->
+<div class="sep-band">
+  <div class="sep-num">04</div>
+  <div class="sep-text"><h3>Qualitative Insights</h3><p>What employees are saying across 44 open comments</p></div>
+</div>
+
+<!-- ── 05 POSITIVE vs IMPROVEMENT ───────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">05 · What Employees Value vs. What Needs Work</div>
+  <div class="section-heading">Top Areas Selected</div>
+  <div class="section-sub">Up to 3 selections per person · raw counts across 163 respondents</div>
+  <div class="split-grid">
+    <div>
+      <div class="panel-head pos">✦ MOST POSITIVE AREAS</div>
+      <div class="panel-body" id="posPanel"></div>
+    </div>
+    <div>
+      <div class="panel-head neg">⚠ NEEDS MOST IMPROVEMENT</div>
+      <div class="panel-body" id="negPanel"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 06 eNPS & RETENTION ──────────────────────────────── -->
+<div class="section fade-in">
+  <hr class="divider">
+  <div class="section-eyebrow">06 · eNPS & Retention</div>
+  <div class="section-heading">Would Employees Recommend Tribe?</div>
+  <div class="section-sub">eNPS = (Promoters − Detractors) ÷ Total × 100 · Fintech benchmark: 0–30 = Good · 30–70 = Excellent</div>
+  <div class="enps-grid">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">eNPS Score</div>
+      <div class="enps-big" style="color:var(--purple);">+25</div>
+      <div style="font-size:14px;font-weight:700;color:var(--green);margin-top:4px;">GOOD</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">Fintech benchmark: 0–30 = Good<br>30–70 = Excellent</div>
+      <div class="enps-bar-wrap" style="margin-top:20px;">
+        <div class="enps-seg" style="width:15.3%;background:var(--red-grad);">15%</div>
+        <div class="enps-seg" style="width:44.8%;background:#999;">45%</div>
+        <div class="enps-seg" style="width:39.9%;background:var(--purple);">40%</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:10px;color:var(--muted);margin-top:4px;"><span>Detractors</span><span>Passives</span><span>Promoters</span></div>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px;">Retention Intent</div>
+      <div class="enps-big" style="color:var(--gold);">7.67</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:4px;">out of 10</div>
+      <div style="font-size:12px;color:var(--text);font-style:italic;margin-top:8px;">"I see myself continuing to work here in the next 2 years"</div>
+      <div style="background:#FEF3C7;border:1px solid var(--gold);border-radius:8px;padding:10px;margin-top:14px;font-size:12px;color:#7D5A00;">
+        ⚠ Below overall avg (8.24) by 0.57 points.<br>Lowest of all 16 questions.
+      </div>
+    </div>
+    <div class="card">
+      <div style="font-family:'Poppins',sans-serif;font-size:11px;font-weight:700;color:var(--purple);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Key Risks</div>
+      <div id="riskList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── 07 INSIGHTS ───────────────────────────────────────── -->
+<div class="section fade-in">
+  <hr class="divider">
+  <div class="section-eyebrow">07 · Key Insights — Company-Wide</div>
+  <div class="section-heading">Themes from 44 Open Comments</div>
+  <div class="section-sub">Distilled qualitative patterns across all departments and squads</div>
+  <div class="insight-grid" id="insightGrid"></div>
+</div>
+
+<!-- ── SECTION BREAK ──────────────────────────────────────── -->
+<div class="sep-band">
+  <div class="sep-num">05</div>
+  <div class="sep-text"><h3>Squad Insights</h3><p>Key findings and concerns per product squad</p></div>
+</div>
+
+<!-- ── 08 SQUAD INSIGHTS ─────────────────────────────────── -->
+<div class="section fade-in">
+  <div class="section-eyebrow">08 · Squad-Level Insights</div>
+  <div class="section-heading">Ranked Highest → Lowest Average</div>
+  <div class="section-sub">Top concerns, scores and key findings per squad</div>
+  <div class="card" style="padding:0;overflow:hidden;">
+    <table class="squad-table" id="squadInsights"></table>
+  </div>
+</div>
+
+<!-- ── SECTION BREAK ──────────────────────────────────────── -->
+<div class="sep-band">
+  <div class="sep-num">06</div>
+  <div class="sep-text"><h3>Recommendations</h3><p>Priority actions ordered by urgency and impact</p></div>
+</div>
+
+<!-- ── 09 RECOMMENDATIONS ───────────────────────────────── -->
+<div class="section section-last fade-in">
+  <div class="section-eyebrow">09 · Priority Recommendations</div>
+  <div class="section-heading">Actions Ordered by Urgency</div>
+  <div class="section-sub">Based on quantitative scores and qualitative feedback across 163 respondents</div>
+  <div id="recsContainer"></div>
+</div>
+
+</div><!-- /container -->
+
+<!-- TOOLTIP POPUP -->
+<div class="tooltip-popup" id="tooltip"></div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Tribe Payments</strong> · Internal Employee Survey Analysis · April 2026 · Confidential<br>
+  <span style="font-size:11px;opacity:0.6;margin-top:4px;display:block;">This document is strictly private and confidential</span>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════════
+const AVG = 8.24;
+
+const FULL_QUESTIONS = [
+  {short:"Interesting job",    full:"My job is interesting and engaging."},
+  {short:"Learning & growth",  full:"I have opportunities to learn new skills and grow in my role or within the company."},
+  {short:"Clear expectations", full:"I clearly understand what is expected of me regarding my performance and goals."},
+  {short:"Psych. safety",      full:"I feel safe sharing my ideas, opinions, or concerns."},
+  {short:"Collab. culture",    full:"The company fosters a collaborative work environment."},
+  {short:"Physical workplace", full:"I am satisfied with the physical workplace (office space, tools, and resources)."},
+  {short:"Workload stress",    full:"My workload allows me to perform effectively without excessive stress."},
+  {short:"Work-life balance",  full:"I am satisfied with the flexibility provided and my overall work-life balance."},
+  {short:"Team comms",         full:"Communication within my team is clear and effective."},
+  {short:"Team atmosphere",    full:"The atmosphere in my team is positive and supportive."},
+  {short:"Team appreciation",  full:"My team appreciates my contributions."},
+  {short:"Team alignment",     full:"Expectations within the team are clear and aligned."},
+  {short:"Mgr recognition",    full:"Team members have equal opportunities for recognition and support from the manager."},
+  {short:"Mgr feedback",       full:"I receive regular, constructive feedback and coaching from my manager."},
+  {short:"Retention 2yr",      full:"I see myself continuing to work for the company in the next 2 years."},
+  {short:"Recommend Tribe",    full:"How likely are you to recommend Tribe Payments as a place to work? (eNPS input)"},
+];
+const Q_AVGS = [8.27,8.17,8.20,8.31,8.12,8.39,7.60,8.37,8.51,8.69,8.41,8.39,8.56,8.29,7.67,7.91];
+
+const DEPT_LABELS = ['DEVOPS','FINANCE','PEOPLE & OFFICE','CTO OFFICE','ISAC-ISSUING','GATEWAY','WALLET','ISAC-ACQUIRING','ISAC','BANK CONNECT','RISKMONITOR','COMPLIANCE & SECURITY','PRODUCT MANAGEMENT','Other','ISAC-POS','IMPLEMENTATION','QUALITY ASSURANCE','PRODUCT DELIVERY','COMMERCIAL','OPERATIONS','SENIOR MANAGEMENT'];
+const DEPT_TOTALS = [9.41,9.06,9.03,8.77,8.76,8.73,8.69,8.67,8.58,8.57,8.51,8.31,8.00,7.98,7.96,7.91,7.85,7.67,7.62,7.56,6.96];
+const DEPT_MATRIX = [[10,10,10,10,10,10,10,10,10,10,10,10,10,10,9.0,9.5],[9.67,9.67,9.33,9.33,9.33,9.33,8.33,8.33,9.67,10,10,9.33,10,9.67,9.0,9.33],[8.86,8.86,9.14,9.43,8.86,8.86,9.43,9.43,9.14,9.71,9.14,9.43,9.57,9.14,9.43,9.71],[9.33,8.67,9.33,9.0,8.67,8.0,8.67,9.33,9.0,9.33,10,9.33,9.33,9.0,8.33,9.33],[8.47,8.35,8.82,9.12,8.76,8.76,8.59,8.94,8.94,9.0,8.82,9.12,9.29,9.06,8.47,8.76],[8.67,9.0,9.0,9.0,9.0,9.67,8.0,8.33,9.0,9.33,8.67,9.0,9.0,9.0,8.0,8.75],[9.0,9.0,8.91,9.27,9.18,8.27,8.36,9.09,9.27,9.36,9.27,9.18,9.45,9.18,8.45,8.91],[8.89,8.56,9.0,8.56,8.44,9.0,7.78,8.67,8.78,9.11,8.56,8.56,8.78,8.22,8.67,8.89],[8.33,8.33,8.67,8.67,9.0,7.33,8.67,8.33,8.67,9.0,9.0,8.67,9.0,8.33,8.67,9.0],[9.0,9.0,8.75,8.75,9.0,8.75,8.38,8.25,8.75,9.5,8.88,8.88,9.38,8.88,8.25,8.75],[7.83,8.17,8.33,9.0,8.0,8.83,8.5,8.83,9.17,9.5,9.17,8.83,9.17,9.0,8.33,8.33],[8.25,8.5,8.5,8.5,8.25,8.75,7.5,7.75,8.25,8.5,8.5,8.5,8.0,8.0,8.5,8.25],[8.25,8.25,7.0,7.0,7.0,8.5,8.0,9.0,8.25,9.25,8.75,8.25,8.5,8.5,8.0,8.25],[8.0,8.17,8.0,8.0,7.67,8.5,7.33,7.83,7.83,8.33,8.0,7.33,8.17,7.67,8.0,8.0],[7.67,7.67,7.67,8.33,8.33,7.0,7.33,8.0,9.33,8.67,7.67,7.33,7.67,7.0,7.33,8.67],[8.0,8.1,8.5,7.2,7.2,7.1,7.7,8.3,8.6,8.9,8.8,8.6,8.3,8.2,6.9,7.7],[7.89,7.67,7.5,8.06,7.78,8.11,7.17,7.89,8.56,8.67,8.33,7.94,8.5,7.94,7.72,7.89],[7.5,7.75,7.5,7.44,7.31,8.5,7.25,8.44,7.69,7.81,7.44,7.38,7.75,8.13,7.44,7.56],[7.7,7.5,7.3,7.5,7.4,8.7,6.8,8.5,8.0,8.1,7.3,7.5,7.5,7.5,7.6,8.1],[7.78,7.0,7.56,7.22,7.67,7.44,5.78,7.33,8.11,8.0,7.11,7.67,7.44,7.78,6.89,7.33],[7.8,7.8,6.6,5.8,5.2,8.6,6.0,8.4,6.0,6.6,7.6,6.6,6.4,5.6,6.6,6.8]];
+
+const SQUAD_LABELS = ["BANK CONNECT","GATEWAY","ISAC-ACQUIRING","RISKMONITOR","Other","ISAC-POS","ISAC-ISSUING","xxx","WALLET"];
+const SQUAD_TOTALS = [8.71,8.59,8.56,8.42,8.31,8.27,8.20,8.14,7.97];
+const SQUAD_MATRIX = [[9.11,9.22,9.0,9.0,9.22,9.0,8.78,8.89,9.22,9.44,9.0,9.11,9.44,9.0,8.56,8.78],[8.75,9.0,9.0,9.0,9.0,9.75,8.0,8.75,9.25,9.75,9.25,9.0,9.0,9.25,8.0,8.75],[8.88,8.5,9.13,8.63,8.5,9.25,8.0,8.63,8.88,9.25,8.75,8.5,8.88,8.13,8.38,8.75],[7.86,8.43,8.57,9.0,8.14,8.86,8.57,9.0,9.0,9.29,8.86,8.86,9.14,9.14,8.14,8.43],[7.88,7.88,7.75,8.25,7.88,8.75,7.25,8.25,8.5,8.63,8.25,7.75,8.0,8.0,7.88,8.5],[7.67,7.67,7.67,8.33,8.33,7.0,7.67,8.0,9.33,8.67,7.67,7.33,7.67,7.0,7.33,8.67],[8.29,8.21,8.57,9.04,8.61,8.71,8.36,8.75,8.89,9.07,8.68,8.96,9.29,9.18,7.79,8.14],[8.09,8.01,8.21,8.13,8.07,8.43,7.66,8.34,8.38,8.69,8.35,8.31,8.54,8.29,7.82,8.14],[8.91,9.0,8.64,8.91,8.64,8.45,7.91,8.73,9.0,9.09,8.82,8.73,9.09,9.0,7.36,7.73]];
+
+// ═══════════════════════════════════════════════════════════════
+// COLOR HELPERS
+// ═══════════════════════════════════════════════════════════════
+function lerp(a,b,t){return Math.round(a+(b-a)*Math.max(0,Math.min(1,t)));}
+function divergeColor(v,avg){
+  if(v==null)return '#F0EEF2';
+  const w=[255,255,255],g=[39,174,96],r=[228,105,98];
+  let rgb;
+  if(v>=avg){const t=(v-avg)/(10-avg);rgb=w.map((c,i)=>lerp(c,g[i],t));}
+  else{const t=(avg-v)/(avg-1);rgb=w.map((c,i)=>lerp(c,r[i],t));}
+  return '#'+rgb.map(c=>c.toString(16).padStart(2,'0')).join('');
+}
+function textOn(hex){
+  const h=hex.replace('#','');
+  const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
+  return (0.299*r+0.587*g+0.114*b)<145?'#FFFFFF':'#3D0A44';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// CATEGORY BARS
+// ═══════════════════════════════════════════════════════════════
+const cats = [
+  ["Team Collaboration & Communication", 8.50, '#4D1254'],
+  ["Manager Support & Recognition",      8.43, '#4D1254'],
+  ["Work Environment & Culture",         8.27, '#6B2A72'],
+  ["Work and Growth",                    8.21, '#6B2A72'],
+  ["Workload & Work-Life Balance",       7.99, '#EFA500'],
+  ["Retention Intent (2-year)",          7.67, '#EFA500'],
+  ["Recommend Tribe (eNPS input)",       7.91, '#999'],
+];
+const catContainer = document.getElementById('catBars');
+cats.forEach(([label,score,color])=>{
+  const bw=8.0, fill=(score/10)*100;
+  const avgPct=(AVG/10)*100;
+  catContainer.innerHTML += `
+  <div class="cat-row">
+    <div class="cat-lbl">${label}</div>
+    <div class="cat-track" style="position:relative;">
+      <div class="cat-fill" style="width:${fill}%;background:${color};"></div>
+      <div class="cat-avg-line" style="left:${avgPct}%;"></div>
+    </div>
+    <div class="cat-val" style="color:${color}">${score.toFixed(2)}</div>
+  </div>`;
+});
+
+// ═══════════════════════════════════════════════════════════════
+// HEATMAP BUILDER
+// ═══════════════════════════════════════════════════════════════
+const tooltip = document.getElementById('tooltip');
+
+function buildHeatmap(tableId, rowLabels, matrix, totals) {
+  const table = document.getElementById(tableId);
+  // Header
+  const hr = document.createElement('tr');
+  const th0 = document.createElement('th');
+  th0.textContent = 'Department / Squad';
+  hr.appendChild(th0);
+  FULL_QUESTIONS.forEach((q,qi)=>{
+    const th = document.createElement('th');
+    const avg = Q_AVGS[qi];
+    th.innerHTML = `<span class="q-num">Q${qi+1}</span>${q.short}`;
+    th.title = q.full;
+    // Click to show tooltip
+    th.addEventListener('click', (e)=>{
+      showQTooltip(e, qi);
+    });
+    th.addEventListener('mouseenter',(e)=>{
+      showQTooltip(e, qi);
+    });
+    th.addEventListener('mouseleave',()=>{ tooltip.style.display='none'; });
+    hr.appendChild(th);
+  });
+  const thTot = document.createElement('th');
+  thTot.classList.add('tot');
+  thTot.innerHTML = '<span class="q-num">AVG</span>';
+  hr.appendChild(thTot);
+  table.appendChild(hr);
+
+  // Col avg row
+  const avgRow = document.createElement('tr');
+  avgRow.classList.add('col-avg-row');
+  const td0a = document.createElement('td');
+  td0a.textContent = '↑ Column averages';
+  avgRow.appendChild(td0a);
+  Q_AVGS.forEach(a=>{
+    const td=document.createElement('td');
+    td.textContent=a.toFixed(1);
+    avgRow.appendChild(td);
+  });
+  const tdTotA=document.createElement('td');
+  tdTotA.textContent=AVG.toFixed(2);
+  avgRow.appendChild(tdTotA);
+  table.appendChild(avgRow);
+
+  // Data rows
+  rowLabels.forEach((label,ri)=>{
+    const tr = document.createElement('tr');
+    const td0 = document.createElement('td');
+    td0.textContent = label.replace('COMMERCIAL (SALES, PARTNERSHIPS, CUSTOMER SUCCESS)','COMMERCIAL');
+    tr.appendChild(td0);
+    (matrix[ri]||[]).forEach(v=>{
+      const td=document.createElement('td');
+      const bg=divergeColor(v,AVG);
+      const tc=textOn(bg);
+      td.innerHTML=`<div class="hm-cell" style="background:${bg};color:${tc}">${v!=null?v.toFixed(1):'—'}</div>`;
+      tr.appendChild(td);
+    });
+    // Total
+    const tot=totals[ri];
+    const tbg=divergeColor(tot,AVG), ttc=textOn(tbg);
+    const tdTot=document.createElement('td');
+    tdTot.classList.add('tot-cell');
+    tdTot.style.background=tbg;
+    tdTot.style.color=ttc;
+    tdTot.textContent=tot.toFixed(2);
+    tr.appendChild(tdTot);
+    table.appendChild(tr);
+  });
+}
+
+function showQTooltip(e, qi) {
+  const q = FULL_QUESTIONS[qi];
+  const avg = Q_AVGS[qi];
+  const color = avg >= AVG ? '#27AE60' : '#E46962';
+  tooltip.innerHTML = `
+    <div class="tt-q">Q${qi+1}</div>
+    <div class="tt-full">${q.full}</div>
+    <div class="tt-avg">Company average: <strong style="color:${color}">${avg.toFixed(2)}</strong></div>
+  `;
+  tooltip.style.display = 'block';
+  positionTooltip(e);
+}
+document.addEventListener('mousemove', (e)=>{
+  if(tooltip.style.display==='block') positionTooltip(e);
+});
+function positionTooltip(e){
+  const tx = e.clientX + 14;
+  const ty = e.clientY + 14;
+  const tw = tooltip.offsetWidth || 300;
+  tooltip.style.left = (tx+tw > window.innerWidth ? tx-tw-28 : tx)+'px';
+  tooltip.style.top  = ty+'px';
+}
+
+buildHeatmap('deptTable',  DEPT_LABELS,  DEPT_MATRIX,  DEPT_TOTALS);
+buildHeatmap('squadTable', SQUAD_LABELS, SQUAD_MATRIX, SQUAD_TOTALS);
+
+// ═══════════════════════════════════════════════════════════════
+// RED FLAGS
+// ═══════════════════════════════════════════════════════════════
+const flags = [
+  {r:1,avg:3.38,dept:"SENIOR MANAGEMENT",  squad:"xxx",          mgr:"Andrew Hocking",      note:"Psych.safety=1, Collab=1, Comms=1"},
+  {r:2,avg:3.62,dept:"PRODUCT DELIVERY",   squad:"ISAC-ISSUING", mgr:"Ieva Usonyte",        note:"Mgr recog=2, Expectations=3, Clarity=3"},
+  {r:3,avg:4.00,dept:"QUALITY ASSURANCE",  squad:"WALLET",       mgr:"Valentinas Skromovas",note:"All dims low, Mgr recognition=2"},
+  {r:4,avg:4.19,dept:"QUALITY ASSURANCE",  squad:"ISAC-ISSUING", mgr:"Mantas Armonavicius", note:"Team=3, Workload=3, Culture=3"},
+  {r:5,avg:4.69,dept:"WALLET",             squad:"WALLET",       mgr:"Jonas Lankelis",      note:"Workload=3, WLB=3, Mgr=2"},
+  {r:6,avg:5.12,dept:"OPERATIONS",         squad:"xxx",          mgr:"Indre Drulyte-Jukne", note:"Workload=2, Team=4, Mgr=3"},
+  {r:7,avg:5.31,dept:"PRODUCT DELIVERY",   squad:"WALLET",       mgr:"Gintare Dmuchovske",  note:"Workload=2, Safety=4, Culture=5"},
+  {r:8,avg:5.50,dept:"PRODUCT DELIVERY",   squad:"WALLET",       mgr:"Ieva Usonyte",        note:"Safety=3, Culture=5, Collab=5"},
+  {r:9,avg:5.50,dept:"COMMERCIAL",         squad:"xxx",          mgr:"Guy Houghton",        note:"Safety=4, Team=4, WLB=3"},
+  {r:10,avg:6.00,dept:"OPERATIONS",        squad:"xxx",          mgr:"Indre Drulyte-Jukne", note:"Workload=4, Team=4, Feedback=4"},
+];
+const fb = document.getElementById('flagBody');
+flags.forEach(f=>{
+  const ac = f.avg<4 ? '#E46962' : f.avg<5.5 ? '#EFA500' : '#4D1254';
+  const rankCls = f.r<=2?'rank-1':f.r<=3?'rank-2':f.r<=6?'rank-3':'rank-n';
+  const rowBg = f.r<=2?'#FEF5F5':f.r<=4?'#FFFBF0':'';
+  fb.innerHTML += `<tr style="background:${rowBg}">
+    <td><span class="rank-badge ${rankCls}">${f.r}</span></td>
+    <td><span class="flag-avg" style="color:${ac}">${f.avg.toFixed(2)}</span></td>
+    <td>${f.dept}</td>
+    <td><span class="pill pill-purple">${f.squad}</span></td>
+    <td style="color:var(--muted);font-size:11px">${f.mgr}</td>
+    <td style="font-size:11px;color:var(--muted)">${f.note}</td>
+  </tr>`;
+});
+
+// ═══════════════════════════════════════════════════════════════
+// POSITIVE / NEGATIVE BARS
+// ═══════════════════════════════════════════════════════════════
+const pos=[["Colleagues",76],["Flexibility",60],["Industry / Field",57],["Job Role / Responsibilities",56],["Work-life Balance",45],["Growth & Development",36],["Culture",34],["Compensation",30]];
+const neg=[["Compensation",71],["Workload & Stress",60],["Communication",51],["Growth & Development",33],["Tools & Resources",33],["Recognition",31],["Work-life Balance",28],["Collaboration",25]];
+function buildBarPanel(id,data,color){
+  const el=document.getElementById(id);
+  data.forEach(([l,v])=>{
+    el.innerHTML+=`<div class="bar-row2">
+      <div class="bar-lbl2">${l}</div>
+      <div class="bar-track2"><div class="bar-fill2" style="width:${v/80*100}%;background:${color}"></div></div>
+      <div class="bar-val2" style="color:${color}">${v}</div>
+    </div>`;
+  });
+}
+buildBarPanel('posPanel',pos,'#4D1254');
+buildBarPanel('negPanel',neg,'#E46962');
+
+// ═══════════════════════════════════════════════════════════════
+// RISK LIST
+// ═══════════════════════════════════════════════════════════════
+const risks=["Colleagues (76 votes) are the #1 retention driver — not pay, growth or mission. Fragile anchor.","Compensation dissatisfaction (71 votes) is the top improvement area company-wide","3 managers appear twice in the bottom-10 disengagement list","WALLET squad: 3 of 10 most disengaged employees despite 7.97 avg","Retention score (7.67) is the lowest of all 16 questions"];
+const rl=document.getElementById('riskList');
+risks.forEach(r=>{
+  rl.innerHTML+=`<div style="display:flex;gap:10px;margin-bottom:12px;align-items:flex-start;">
+    <div style="flex-shrink:0;width:18px;height:18px;background:var(--purple);border-radius:50%;margin-top:1px;"></div>
+    <div style="font-size:12px;color:#374151;line-height:1.6;">${r}</div>
+  </div>`;
+});
+
+// ═══════════════════════════════════════════════════════════════
+// INSIGHTS
+// ═══════════════════════════════════════════════════════════════
+const insights=[
+  {icon:"💸",title:"Compensation & Benefits Erosion",tag:"CRITICAL",tagBg:"#FEE2E2",tagColor:"#991B1B",border:"#E46962",bg:"#FEF5F5",text:"#1 improvement area (71 selections). Canceled salary reviews, reduced iLunch (150€), health insurance replaced with pension contribution. Employees feel declining real value vs. rising inflation."},
+  {icon:"⚡",title:"Workload & Understaffing",tag:"HIGH",tagBg:"#FEF3C7",tagColor:"#92400E",border:"#EFA500",bg:"#FFFDF5",text:"60 votes. Burnout signals across teams, difficulty taking leave, speed over quality. Tech teams cite misaligned business vs. technical priorities."},
+  {icon:"🔇",title:"Transparency Deficit",tag:"HIGH",tagBg:"#FEE2E2",tagColor:"#991B1B",border:"#E46962",bg:"#FEF5F5",text:"Multiple respondents independently: major decisions 'come out of nowhere'. Canceled salary cycles, benefit changes without context — eroding leadership trust."},
+  {icon:"📡",title:"AI Tooling Gap",tag:"OPPORTUNITY",tagBg:"#EDE8F0",tagColor:"#4D1254",border:"#4D1254",bg:"#FAF7FC",text:"Multiple teams: 'falling behind,' '0 tools provided,' 'surveys for years without action.' Clear expectation gap between market pace and Tribe's AI adoption."},
+  {icon:"🧑‍🤝‍🧑",title:"Colleagues = #1 Retention Anchor",tag:"STRENGTH",tagBg:"#DCFCE7",tagColor:"#166534",border:"#27AE60",bg:"#F0FDF4",text:"76 votes — highest positive area. 'Team relationships are why I stay.' Fragile: if key people leave, cascading departures are likely."},
+  {icon:"🌱",title:"No Visible Career Paths",tag:"HIGH",tagBg:"#FEF3C7",tagColor:"#92400E",border:"#EFA500",bg:"#FFFDF5",text:"33 votes. No promotion criteria, unclear seniority levels, no bonus framework. Acute in ISAC-ISSUING (50% compensation concern) and ISAC-ACQUIRING."},
+];
+const ig=document.getElementById('insightGrid');
+insights.forEach(ins=>{
+  ig.innerHTML+=`<div class="ins-card" style="background:${ins.bg};border-color:${ins.border}">
+    <span class="ins-tag" style="background:${ins.tagBg};color:${ins.tagColor}">${ins.tag}</span>
+    <div class="ins-title">${ins.icon} ${ins.title}</div>
+    <div class="ins-body">${ins.text}</div>
+  </div>`;
+});
+
+// ═══════════════════════════════════════════════════════════════
+// SQUAD INSIGHTS
+// ═══════════════════════════════════════════════════════════════
+const squads=[
+  {name:"BANK CONNECT",    avg:8.71,tag:"★ Highest",tagColor:"#166534",tagBg:"#DCFCE7",concerns:"Compensation 44% · Growth 33% · Workload 33%",insight:"Strongest squad. Salary review cycle timing weakens performance-reward link."},
+  {name:"GATEWAY",         avg:8.59,tag:"Strong",   tagColor:"#4D1254",tagBg:"#E8D5EE",concerns:"Work-life balance 60% · Compensation 40%",insight:"High scorer. Primary concern: work hours. One specific request — 36h working week."},
+  {name:"ISAC-ACQUIRING",  avg:8.56,tag:"Above avg",tagColor:"#4D1254",tagBg:"#E8D5EE",concerns:"Compensation 38% · Workload 38% · Comms 31%",insight:"Above avg. Career path clarity and office/business travel equity distinctively raised."},
+  {name:"RISKMONITOR",     avg:8.42,tag:"Above avg",tagColor:"#4D1254",tagBg:"#E8D5EE",concerns:"Job Role 43% · Tools 43% · Compensation 29%",insight:"Redmine workflow friction is standout complaint. C-suite communication gap explicitly named."},
+  {name:"ISAC-POS",        avg:8.27,tag:"Near avg", tagColor:"#92400E",tagBg:"#FEF3C7",concerns:"Compensation 67% · Growth 33%",insight:"Small n=3 (directional only). Moldova office physical conditions specifically flagged."},
+  {name:"ISAC-ISSUING",    avg:8.20,tag:"Near avg", tagColor:"#92400E",tagBg:"#FEF3C7",concerns:"Compensation 50% · Workload 43% · Growth 32%",insight:"Highest compensation concern rate (50%). 2 bottom-10 scorers. Manager conflict-of-interest reported."},
+  {name:"xxx (no squad)",  avg:8.14,tag:"Near avg", tagColor:"#92400E",tagBg:"#FEF3C7",concerns:"Compensation 46% · Workload 37% · Comms 32%",insight:"Largest group (68). Salary transparency, AI strategy, inter-office equity and scaling processes."},
+  {name:"WALLET",          avg:7.97,tag:"⚠ Lowest", tagColor:"#991B1B",tagBg:"#FEE2E2",concerns:"Compensation 37% · Workload 37% · Leadership 32%",insight:"3 of bottom-10 scorers. Leadership quality unique concern. High variance masks severe disengagement."},
+];
+const si=document.getElementById('squadInsights');
+si.innerHTML=`<thead><tr>
+  <th>Squad</th><th>Avg</th><th>Status</th><th>Top Concerns</th><th>Key Insight</th>
+</tr></thead>`;
+const stb=document.createElement('tbody');
+squads.forEach(sq=>{
+  const bg=divergeColor(sq.avg,AVG), tc=textOn(bg);
+  stb.innerHTML+=`<tr>
+    <td><strong>${sq.name}</strong></td>
+    <td style="background:${bg};color:${tc};font-family:'Poppins',sans-serif;font-size:14px;font-weight:800;text-align:center;">${sq.avg.toFixed(2)}</td>
+    <td><span style="display:inline-block;padding:3px 9px;border-radius:100px;font-size:10px;font-weight:700;background:${sq.tagBg};color:${sq.tagColor}">${sq.tag}</span></td>
+    <td style="color:var(--muted);font-size:11px;">${sq.concerns}</td>
+    <td style="font-size:12px;">${sq.insight}</td>
+  </tr>`;
+});
+si.appendChild(stb);
+
+// ═══════════════════════════════════════════════════════════════
+// RECOMMENDATIONS
+// ═══════════════════════════════════════════════════════════════
+const recs=[
+  {n:1,urgency:"CRITICAL",color:"#E46962",bg:"#FEF5F5",border:"#E46962",title:"Restore or replace health insurance — communicate benefits roadmap honestly",text:"Single most cited dissatisfaction. If reinstatement isn't possible, offer flexible cafeteria-style benefits. Publish an honest statement about the financial context. Silence is creating speculation and eroding trust."},
+  {n:2,urgency:"HIGH",color:"#EFA500",bg:"#FFFDF5",border:"#EFA500",title:"Urgent review: Senior Management (6.96), Operations (7.56), WALLET squad (7.97)",text:"3 managers appear twice in the bottom-10. WALLET has 3 of 10 most disengaged. Conduct skip-level conversations now. This is a localised crisis, not statistical noise."},
+  {n:3,urgency:"HIGH",color:"#EFA500",bg:"#FFFDF5",border:"#EFA500",title:"Publish a salary & career framework — seniority levels, promotion criteria, comp bands",text:"Growth & Development is #3 improvement area (33 votes). Critical in ISAC-ISSUING (50% compensation concern), ISAC-ACQUIRING and BANK CONNECT squads."},
+  {n:4,urgency:"HIGH",color:"#EFA500",bg:"#FFFDF5",border:"#EFA500",title:"Fix ISAC-ISSUING: resource allocation and business-tech priority alignment",text:"Highest compensation concern rate (50%), 2 bottom-10 scorers, understaffing and a reported manager conflict-of-interest. Needs dedicated squad-level intervention."},
+  {n:5,urgency:"MEDIUM",color:"#4D1254",bg:"#FAF7FC",border:"#4D1254",title:"Launch an AI tooling strategy with visible, immediate action",text:"Multiple teams independently raised this: 'falling behind,' '0 tools provided.' Consider GitHub Copilot, ChatGPT Teams, or an internal AI champion program."},
+  {n:6,urgency:"INVEST",color:"#27AE60",bg:"#F0FDF4",border:"#27AE60",title:"Invest in team culture before it erodes — colleagues are the #1 retention anchor",text:"76 votes — highest positive area. Increase team-building budgets (costs rising), schedule events during work hours, recognise long-tenured employees publicly."},
+];
+const rc=document.getElementById('recsContainer');
+recs.forEach(r=>{
+  rc.innerHTML+=`<div class="rec-card" style="background:${r.bg};border-color:${r.border}">
+    <div class="rec-num" style="background:${r.color}">${r.n}</div>
+    <div style="flex-shrink:0;">
+      <span style="display:inline-block;padding:3px 9px;border-radius:100px;font-size:9px;font-weight:700;background:${r.color};color:white;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">${r.urgency}</span>
+    </div>
+    <div class="rec-body">
+      <h4>${r.title}</h4>
+      <p>${r.text}</p>
+    </div>
+  </div>`;
+});
+</script>
+</body>
+</html>
